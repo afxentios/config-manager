@@ -1,0 +1,17 @@
+language: python
+sudo: false
+python:
+  - "2.7"
+
+branches:
+    only:
+    - master
+
+install:
+  - "pip install pytest-cov coveralls pyyaml"
+
+script:
+  - "py.test --cov-config .coveragerc  --cov config_manager"
+
+after_success:
+  - "coveralls"
