@@ -62,7 +62,7 @@ Usage
 
   #configs.yaml contains the configuration data
 
-  from  config_manager import ConfigManager
+  from config_manager import ConfigManager
   confman = ConfigManager(config_file_path='/path/to/configs.yaml', defaults={'maintenance':'False'}, required=['maintenance'])
   maintenance = confman['maintenance']
 
