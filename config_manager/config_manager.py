@@ -1,17 +1,21 @@
 from __future__ import with_statement
 
+import sys
+
 try:
     import yaml
 except ImportError:
-    print ("[-] The yaml module is needed to use encrypted yaml.\nGo to http://pyyaml.org or `pip install PyYaml`")
-    raise
-
+    sys.exit("""
+                The yaml module is needed to read the logging configurations,
+                install it from https://pypi.org/project/PyYAML/    
+                or run pip install pyyaml.
+            """)
 try:
     import json
 except ImportError:
     import simplejson as json
 import logging
-from config_ruleset import ConfigRuleset
+from .config_ruleset import ConfigRuleset
 
 logger = logging.getLogger()
 
