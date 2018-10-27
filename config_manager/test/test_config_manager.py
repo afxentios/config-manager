@@ -1,10 +1,37 @@
+import sys
+
 try:
     import unittest2 as unittest
 except ImportError:
     import unittest
-import yaml
-
-from mock import patch, mock_open
+try:
+    import yaml
+except ImportError:
+    if sys.version_info < (3, 0, 0):
+        print ("[-] The yaml module is needed to read the logging configurations,"
+               "\ninstall it from https://pypi.org/project/PyYAML/"
+               "\n or run `pip install pyyaml.")
+        raise
+    else:
+        sys.exit("""
+                    The yaml module is needed to read the logging configurations,
+                    install it from https://pypi.org/project/PyYAML/
+                    or run `pip install pyyaml`.
+                """)
+try:
+    from mock import patch, mock_open
+except ImportError:
+    if sys.version_info < (3, 0, 0):
+        print ("[-] The mock module is needed to create mock objects,"
+               "\ninstall it from https://pypi.org/project/mock/"
+               "\nor run `pip install mock`.")
+        raise
+    else:
+        sys.exit("""
+                    The mock module is needed to create mock objects,
+                    install it from https://pypi.org/project/mock/    
+                    or run `pip install mock`.
+                """)
 
 from config_manager.config_manager import ConfigManager, FileFormatError
 
@@ -121,16 +148,28 @@ class ConfigurationManagerTest(unittest.TestCase):
         with self.assertRaises(IOError):
             ConfigManager(config_file_path=config_file_path)
 
-    @patch('__builtin__.open',
-           mock_open(read_data="config_key: 'config_value'\nanother_config_key: 'another_config_value'"))
-    def test_load_file_data_return_data(self):
-        # Given
-        config_man = ConfigManager()
-        expected = "config_key: 'config_value'\nanother_config_key: 'another_config_value'"
-        # When
-        actual = config_man.load_file_data()
-        # Then
-        self.assertEqual(actual, expected)
+    if sys.version_info < (3, 0, 0):
+        @patch('__builtin__.open',
+               mock_open(read_data="config_key: 'config_value'\nanother_config_key: 'another_config_value'"))
+        def test_load_file_data_return_data(self):
+            # Given
+            config_man = ConfigManager()
+            expected = "config_key: 'config_value'\nanother_config_key: 'another_config_value'"
+            # When
+            actual = config_man.load_file_data()
+            # Then
+            self.assertEqual(actual, expected)
+    else:
+        @patch('builtins.open',
+               mock_open(read_data="config_key: 'config_value'\nanother_config_key: 'another_config_value'"))
+        def test_load_file_data_return_data(self):
+            # Given
+            config_man = ConfigManager()
+            expected = "config_key: 'config_value'\nanother_config_key: 'another_config_value'"
+            # When
+            actual = config_man.load_file_data()
+            # Then
+            self.assertEqual(actual, expected)
 
 
 class FileFormatErrorTest(unittest.TestCase):
