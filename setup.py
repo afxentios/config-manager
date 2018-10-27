@@ -8,7 +8,7 @@ def readme():
 
 
 setup(name='config-manager',
-      version='1.1.1',
+      version='1.1.2',
       description='A basic configuration reader and manager for python projects',
       long_description=readme(),
       url='https://github.com/afxentios/config-manager',
