@@ -5,11 +5,17 @@ import sys
 try:
     import yaml
 except ImportError:
-    sys.exit("""
-                The yaml module is needed to read the logging configurations,
-                install it from https://pypi.org/project/PyYAML/    
-                or run pip install pyyaml.
-            """)
+    if sys.version_info < (3, 0, 0):
+        print ("[-] The yaml module is needed to read the logging configurations,"
+               "\ninstall it from https://pypi.org/project/PyYAML/"
+               "\n or run `pip install pyyaml`")
+        raise
+    else:
+        sys.exit("""
+                    The yaml module is needed to read the logging configurations,
+                    install it from https://pypi.org/project/PyYAML/
+                    or run `pip install pyyaml`.
+                """)
 try:
     import json
 except ImportError:
