@@ -72,6 +72,6 @@ License
 
 This project is licensed under the MIT license.
 
-.. _Changelog: https://github.com/afxentios/config-manager/blob/master/CHANGELOG.md
+.. _Changelog: https://github.com/afxentios/config-manager/blob/master/CHANGELOG.rst
 .. _Issue tracker: https://github.com/afxentios/config-manager/issues
 .. _latest release: https://github.com/afxentios/config-manager/releases

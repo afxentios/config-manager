@@ -1,6 +1,5 @@
-from setuptools import setup, find_packages
-
-import config_manager
+from setuptools import setup
+from setuptools import find_packages
 
 
 def readme():
@@ -9,16 +8,21 @@ def readme():
 
 
 setup(name='config-manager',
-      version=config_manager.__version__,
+      version='1.1.1',
       description='A basic configuration reader and manager for python projects',
       long_description=readme(),
       url='https://github.com/afxentios/config-manager',
       license='MIT',
-      author=config_manager.__author__,
+      author='Afxentios Hadjiminas',
       author_email='afxentios@hadjimina.com',
       keywords=["configuration", "management"],
       packages=find_packages(),
-      install_requires=['PyYAML', 'simplejson', 'mock'],
+      install_requires=['pyyaml',
+                        'simplejson'],
+      extras_require={
+          'test': ['unittest2',
+                   'mock']
+      },
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Intended Audience :: Developers',
@@ -29,5 +33,6 @@ setup(name='config-manager',
           'Programming Language :: Python :: 3',
           'Programming Language :: Python :: 3.6',
           'Programming Language :: Python :: 3.7',
+          'Topic :: Software Development :: Libraries',
           'Topic :: Software Development :: Libraries :: Python Modules']
       )
